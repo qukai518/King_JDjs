@@ -8,17 +8,9 @@
 // 同一个京东账号的好友助力码用@符号隔开,不同京东账号之间用&符号或者换行隔开,下面给一个示例
 // 如: 京东账号1的shareCode1@京东账号1的shareCode2&京东账号2的shareCode1@京东账号2的shareCode2
 let JxncShareCodes = [
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',  //账号一的好友shareCode,不同好友的shareCode中间用@符号隔开
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',  //账号二的好友shareCode,不同好友的shareCode中间用@符号隔开
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',
+//账号好友的shareCode,不同好友中间用@符号隔开
+'',
+'',
 ]
 // 判断github action里面是否有京喜农场助力码
 if (process.env.JXNC_SHARECODES) {
