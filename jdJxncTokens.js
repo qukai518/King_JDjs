@@ -6,16 +6,9 @@
 // 每个账号 token 是一个 json，示例如下
 // {"farm_jstoken":"749a90f871adsfads8ffda7bf3b1576760","timestamp":"1610165423873","phoneid":"42c7e3dadfadsfdsaac-18f0e4f4a0cf"}
 let JxncTokens = [
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',  //账号一的好友shareCode,不同好友的shareCode中间用@符号隔开
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',  //账号二的好友shareCode,不同好友的shareCode中间用@符号隔开
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',
-  '{"smp":"b819db0c4826e91e850f1a14342a4999","active":"jdnc_1_shanyaopian210601_2","joinnum":2}',
+//账号好友的shareCode,不同好友中间用@符号隔开
+'',
+'',
 ]
 // 判断github action里面是否有京喜农场 token 
 if (process.env.JXNCTOKENS) {
