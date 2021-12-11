@@ -2,11 +2,11 @@
 ``` 
 ql repo https://ghproxy.com/https://github.com/qukai518/King_JDjs.git "jd_|jx_|gua_|jddj_" "README|qt|backUp" "jdCookie|sendNotify|function|utils"
 ```
-### 安装依赖:
+### 安装青龙需要一些的依赖:
 <details>
 <summary>查看</summary>
 
-加了一件安装依赖脚本
+* docker exec -it qinglong bash #qinglong		为容器名根据自己容器修改
 
 * Linux下面装:
     ```
