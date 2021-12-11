@@ -20,9 +20,8 @@ ql repo https://ghproxy.com/https://github.com/qukai518/King_JDjs.git "jd_|jx_|g
     ```
     bizMsg&bizCode&lxml
    ```
-
  
  
 </details>
 
-## Ninja搭建步骤教程：[点此查看](https://github.com/qukai518/King_JDjs/blob/main/README/Ninja.md)  
+### Ninja搭建步骤教程：[点此查看](https://github.com/qukai518/King_JDjs/blob/main/README/Ninja.md)  
