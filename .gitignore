@@ -1,12 +1,4 @@
 *.bat
 result.txt
-jdCashShareCodes.js
-jdCookie.js
-jdDreamFactoryShareCodes.js
-jdFactoryShareCodes.js
-jdFruitShareCodes.js
-jdJxncShareCodes.js
-jdJxncTokens.js
-jdPetShareCodes.js
-jdPlantBeanShareCodes.js
-jdzzShareCodes.js
+.gitignore
+
