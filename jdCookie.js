@@ -1,10 +1,31 @@
 /*
-
+================================================================================
+魔改自 https://github.com/shufflewzc/faker2/blob/main/jdCookie.js
+修改内容：与task_before.sh配合，由task_before.sh设置要设置要做互助的活动的 ShareCodeConfigName 和 ShareCodeEnvName 环境变量，
+        然后在这里实际解析/ql/log/.ShareCode中该活动对应的配置信息（由code.sh生成和维护），注入到nodejs的环境变量中
+修改原因：原先的task_before.sh直接将互助信息注入到shell的env中，在ck超过45以上时，互助码环境变量过大会导致调用一些系统命令
+        （如date/cat）时报 Argument list too long，而在node中修改环境变量不会受这个限制，也不会影响外部shell环境，确保脚本可以正常运行
+魔改作者：风之凌殇
+================================================================================
 
 此文件为Node.js专用。其他用户请忽略
  */
 //此处填写京东账号cookie。
 let CookieJDs = [
+'pt_key=AAJhrgX0ADCT7ls_EB_WMw2BGzaB1pX8gYGl60rEwu0GS5H_tISu8jcTPn61f4AvR2m2Z2hm9RQ;pt_pin=qukai518_m;',
+'pt_key=AAJhrgZQADAfIaN5YXZVnLCic64FvdIftI3n0dnyDT5rs8KMHOImDd5nZVPSl9hcGh8Nw0Wpf1Q;pt_pin=%E5%AE%8B%E7%9B%BC%E7%9B%BC1990;',
+// 'pt_key=app_openAAJhrlMvADBTdV-1ii0S7poALmJN3XdmbEE6k_RTarIulTNiAd_xbR-2dZYjmcrin6Vz_3r5io8;pt_pin=1459125655-861045;',
+// 'pt_key=app_openAAJhrlMwADA9OpyK9xve59feMJykM-fRghpNTwzCfk8frfflxOrfyeMin_ZsgjXYs2EHLrdDlrw;pt_pin=wdNkkUNdHWVupLf;',
+// 'pt_key=app_openAAJhrlMxADCi4JkQYUKgtVBUE3mdTtEMc_g-2GslQPGgGWbMFdAwwx8S9tgAYohM_ISREEWRyi0;pt_pin=jd_70f9b4e9a2ee0;',
+// 'pt_key=app_openAAJhrlMxADC3VRAXhB4IM2gJs6IC7WMo0EYVSKasxEwcz6CieCwQsRU07AIP5q-4jAbr3JIxNJU;pt_pin=jd_759b9c84f6525;',
+// 'pt_key=app_openAAJhrlMyADCXWZqQ3nz4SQlVh8P2_M-tdhp8xqSMkec1yXXrfCu088meoJvMBH1IwdMEo-KqJ64;pt_pin=jd_42887c5f9ecff;',
+// 'pt_key=app_openAAJhrlMzADAICYlzxFePBAdRfQjQcZOX-g1Faw9JFgyuGpYes9S98urYnKIcFD6iK5Z-BtoT3jY;pt_pin=hanluyang457;',
+// 'pt_key=app_openAAJhrlMzADAB55uu_6MjaZE_FNw_VsLKI64JlHsOhi4f64n3ZGYHIQilRyCGfNK7N-4hqX-wRk0;pt_pin=jd_59287f728345c;',
+// 'pt_key=app_openAAJhrlM0ADA6KiHHkLEieKlnnvgbHbPBwq9AdOp6pdDiLeGrFXW-60iWbrcqRUj7i7VKSlUlohQ;pt_pin=jd_517d428ceed99;',
+// 'pt_key=app_openAAJhrlM1ADDf_yvDYu2IUp8PR8_OTeGW6ABewuvoeU-IQPdcrdVW_MPfsuDGhvzqMKvmn-KWuKk;pt_pin=bulingling1988;',
+// 'pt_key=app_openAAJhrlM2ADAg-EZUB6xGauzeZKsj_htWgITW8gT3mSGuqGATCh9wwR02u3ofRaLGt7aE61I05d8;pt_pin=jd_kFyiaiOPkxRG;',
+// 'pt_key=app_openAAJhrlM2ADDnzdwalfD2ar1pdqTKg1CQ3MzfB7BZ56dUiHSb0OrqZszv-1V4qpG5aSHA5Ew4Rh4;pt_pin=jd_HdOzFZVMnftF;',
+// 'pt_key=app_openAAJhrlM3ADBF4bu1W9ltZz5KasisXEEk7NYz_qL-mDjpxy6iWI2YX07HC98pxdCuvcVUuq-dGhM;pt_pin=x306609322;',
 ]
 // 判断环境变量里面是否有京东ck
 if (process.env.JD_COOKIE) {
@@ -34,62 +55,60 @@ for (let i = 0; i < CookieJDs.length; i++) {
 }
 
 // 以下为注入互助码环境变量（仅nodejs内起效）的代码
-function SetShareCodesEnv(nameConfig = "", envName = "") {
-    let rawCodeConfig = {}
+function SetShareCodesEnv(nameChinese = "", nameConfig = "", envName = "") {
+  let rawCodeConfig = {}
 
-    // 读取互助码
-    shareCodeLogPath = `${process.env.QL_DIR}/log/.ShareCode/${nameConfig}.log`
-    let fs = require('fs')
-    if (fs.existsSync(shareCodeLogPath)) {
-        // 因为faker2目前没有自带ini，改用已有的dotenv来解析
-        // // 利用ini模块读取原始互助码和互助组信息
-        // let ini = require('ini')
-        // rawCodeConfig = ini.parse(fs.readFileSync(shareCodeLogPath, 'utf-8'))
+  // 读取互助码
+  shareCodeLogPath = `${process.env.QL_DIR}/log/.ShareCode/${nameConfig}.log`
+  let fs = require('fs')
+  if (fs.existsSync(shareCodeLogPath)) {
+    // 因为faker2目前没有自带ini，改用已有的dotenv来解析
+    // // 利用ini模块读取原始互助码和互助组信息
+    // let ini = require('ini')
+    // rawCodeConfig = ini.parse(fs.readFileSync(shareCodeLogPath, 'utf-8'))
 
-        // 使用env模块
-        require('dotenv').config({path: shareCodeLogPath})
-        rawCodeConfig = process.env
+    // 使用env模块
+    require('dotenv').config({path: shareCodeLogPath})
+    rawCodeConfig = process.env
+  }
+
+  // 解析每个用户的互助码
+  codes = {}
+  Object.keys(rawCodeConfig).forEach(function (key) {
+    if (key.startsWith(`My${nameConfig}`)) {
+      codes[key] = rawCodeConfig[key]
     }
+  });
 
-    // 解析每个用户的互助码
-    codes = {}
-    Object.keys(rawCodeConfig).forEach(function (key) {
-        if (key.startsWith(`My${nameConfig}`)) {
-            codes[key] = rawCodeConfig[key]
-        }
-    });
+  // 解析每个用户要帮助的互助码组，将用户实际的互助码填充进去
+  let helpOtherCodes = {}
+  Object.keys(rawCodeConfig).forEach(function (key) {
+    if (key.startsWith(`ForOther${nameConfig}`)) {
+      helpCode = rawCodeConfig[key]
+      for (const [codeEnv, codeVal] of Object.entries(codes)) {
+        helpCode = helpCode.replace("${" + codeEnv + "}", codeVal)
+      }
 
-    // 解析每个用户要帮助的互助码组，将用户实际的互助码填充进去
-    let helpOtherCodes = {}
-    Object.keys(rawCodeConfig).forEach(function (key) {
-        if (key.startsWith(`ForOther${nameConfig}`)) {
-            helpCode = rawCodeConfig[key]
-            for (const [codeEnv, codeVal] of Object.entries(codes)) {
-                helpCode = helpCode.replace("${" + codeEnv + "}", codeVal)
-            }
-
-            helpOtherCodes[key] = helpCode
-        }
-    });
-
-    // 按顺序用&拼凑到一起，并放入环境变量，供目标脚本使用
-    let shareCodes = []
-    let totalCodeCount = Object.keys(helpOtherCodes).length
-    for (let idx = 1; idx <= totalCodeCount; idx++) {
-        shareCodes.push(helpOtherCodes[`ForOther${nameConfig}${idx}`])
+      helpOtherCodes[key] = helpCode
     }
-    let shareCodesStr = shareCodes.join('&')
-    process.env[envName] = shareCodesStr
+  });
 
-    console.info(`【tiger仓库】 友情提示：为避免ck超过45以上时，互助码环境变量过大而导致调用一些系统命令（如date/cat）时报 Argument list too long，改为在nodejs中设置 ${nameConfig} 的 互助码环境变量 ${envName}，共计 ${totalCodeCount} 组互助码，总大小为 ${shareCodesStr.length}`)
+  // 按顺序用&拼凑到一起，并放入环境变量，供目标脚本使用
+  let shareCodes = []
+  let totalCodeCount = Object.keys(helpOtherCodes).length
+  for (let idx = 1; idx <= totalCodeCount; idx++) {
+    shareCodes.push(helpOtherCodes[`ForOther${nameConfig}${idx}`])
+  }
+  let shareCodesStr = shareCodes.join('&')
+  process.env[envName] = shareCodesStr
+
+  console.info(`${nameChinese} 的 互助码环境变量 ${envName}，共计 ${totalCodeCount} 组互助码，总大小为 ${shareCodesStr.length} 字节`)
 }
 
 // 若在task_before.sh 中设置了要设置互助码环境变量的活动名称和环境变量名称信息，则在nodejs中处理，供活动使用
+let nameChinese = process.env.ShareCodeConfigChineseName
 let nameConfig = process.env.ShareCodeConfigName
 let envName = process.env.ShareCodeEnvName
-if (nameConfig && envName) {
-    SetShareCodesEnv(nameConfig, envName)
-} else {
-    console.debug(`【tiger仓库】 友情提示：当前未设置 ShareCodeConfigName 或 ShareCodeEnvName 环境变量，将不会尝试在nodejs中生成互助码的环境变量。ps: 两个值目前分别为 ${nameConfig} ${envName}`)
-    console.debug(`如果当前活动并没有互助内容，请无视上面这句话`)
+if (nameChinese && nameConfig && envName) {
+  SetShareCodesEnv(nameChinese, nameConfig, envName)
 }
