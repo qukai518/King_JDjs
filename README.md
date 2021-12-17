@@ -24,7 +24,7 @@ ql repo https://ghproxy.com/https://github.com/qukai518/King_JDjs.git "jd_|jx_|g
  
 </details>
 
-### 环境变量说明:[点此查看](https://github.com/qukai518/King_JDjs/blob/main/README/githubAction.md)  
-### Ninja搭建教程：[点此查看](https://github.com/qukai518/King_JDjs/blob/main/README/Ninja.md)  
+### Ninja 搭建教程：[点此查看](https://github.com/qukai518/King_JDjs/blob/main/README/Ninja.md)  
 ### Termux搭建教程：[点此查看](https://github.com/qukai518/King_JDjs/blob/main/README/Termux.md)  
 ### Cron  搭建教程：[点此查看](https://github.com/qukai518/King_JDjs/blob/main/README/Cron.md)  
+### 环境变量说明:[点此查看](https://github.com/qukai518/King_JDjs/blob/main/README/githubAction.md)  
