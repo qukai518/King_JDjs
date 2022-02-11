@@ -25,30 +25,26 @@ let vender=''
 let num=0
 let shopname=''
 const token = [
-"011BAF6E366D356E7694B0999CE3DE03",
-"C19201D1BBFABECF9184E970DF985F62",
-"2850C9F48618513C2B9727E0C1E7270B",
-"EF39DD14994863B96D690DB2583CFCAB",
-"888BA24E643DB95D83242AD122237CA9",
-"9E6034F4A60088A97427701990163E27",
-"78419F505BFF990180FF253BA10965E5",
-"4575711E8DE40C9344E01693FB41EB4E",
-"396DF5D0CA7E35723DE5CB0B2A8E7CBB",
-"737646C9DCBCB867A041A86C90420986",
-"C520A447B4D69659CD17CF1E1F7FCC40",
-"53378560A6BC7E91EB143DE59183F67F",
-"D0AD519DBC35A253CEC052FD041F2EFD",
-"09B63A54599F85A17BACA9C81F50B1B8",
-'9E6034F4A60088A97427701990163E27',
-'EF39DD14994863B96D690DB2583CFCAB',
-'4575711E8DE40C9344E01693FB41EB4E',
-'011BAF6E366D356E7694B0999CE3DE03',
-'C19201D1BBFABECF9184E970DF985F62',
-'13440850930FC8025A64D67E9D04AB7F',
-'09E4730770FD2E15F9C60365F7FEA6E4',
-'2850C9F48618513C2B9727E0C1E7270B',
-'C4BBEB9CB7892C128545257BEBD7ACA4',
-'0F6FACCF7BB02D82A760E253746ACD31'
+  "2B5C0F65AAB570D1736C8F24D1260D78",
+  "F932E5DE653968BB1D92A2DFFD5318C7",
+  "C4FF5A919CEE68F9669A32950697694C",
+  "39415200CB5E286A4DB604A54C901A13",
+  "0F1BF9A5EC7FCFB93D34C7054C1CC288",
+  "F5E2E3856C6FF1869CCE53153D237112",
+  "7A64973CD1A0873108CB2E4740A86D7D",
+  "621A2C5B99EC5DDAD2C30EFACC5CE2E0",
+  "45DBA1666FC56F3040F2F68396F1CDCE",
+  "91B152F4FE6110D612C16DFD5035B3FB",
+  "098FD50396245FA00EA629B20A533E3E",
+  "DFB0150982F11A1EFB81A5B1399B7BD1",
+  "F12032C7804D496FC82CCCBEDE205CA0",
+  "755A1AA058A02D18CCB4D239E35FCB5B",
+  "4CA02475CEFE1F2C7D704C47636A0F1E",
+  "91B152F4FE6110D612C16DFD5035B3FB",
+  "88C72E9A4F342606C7C98C601CCB3196",
+  "020702C2C96800D57EAB2FA017314A42",
+  "329C618CD7B700B350C8CC8054B8622E",
+  "7BFD202E8D2D071F5E79B6E9D3892020"
 ]
 
 if ($.isNode()) {
@@ -90,6 +86,7 @@ if ($.isNode()) {
       }
       await dpqd()
       await showMsg()
+      await $.wait(1500)
     }
   }
   if ($.isNode() && allMessage) {
@@ -108,6 +105,7 @@ async function dpqd(){
   for (var j = 0; j < token.length; j++) {
     num=j+1
     if (token[j]=='') {continue}
+    getUA()
     await getvenderId(token[j])
     if (vender=='') {continue}
     await getvenderName(vender)
@@ -128,7 +126,8 @@ function getvenderId(token) {
         "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
         "cookie": cookie,
         "referer": 'https://h5.m.jd.com/',
-        "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
+        "User-Agent": $.UA
+        // "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
       }
     }
     $.get(options, (err, resp, data) => {
@@ -166,7 +165,8 @@ function getvenderName(venderId) {
         "accept-encoding": "gzip, deflate, br",
         "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
         "cookie": cookie,
-        "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
+        "User-Agent": $.UA
+        // "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
       }
     }
     $.get(options, (err, resp, data) => {
@@ -202,7 +202,8 @@ function getActivityInfo(token,venderId) {
         "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
         "cookie": cookie,
         "referer": `https://h5.m.jd.com/babelDiy/Zeus/2PAAf74aG3D61qvfKUM5dxUssJQ9/index.html?token=${token}&sceneval=2&jxsid=16105853541009626903&cu=true&utm_source=kong&utm_medium=jingfen&utm_campaign=t_1001280291_&utm_term=fa3f8f38c56f44e2b4bfc2f37bce9713`,
-        "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
+        "User-Agent": $.UA
+        // "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
       }
     }
     $.get(options, (err, resp, data) => {
@@ -245,7 +246,8 @@ function signCollectGift(token,venderId,activitytemp) {
         "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
         "cookie": cookie,
         "referer": `https://h5.m.jd.com/babelDiy/Zeus/2PAAf74aG3D61qvfKUM5dxUssJQ9/index.html?token=${token}&sceneval=2&jxsid=16105853541009626903&cu=true&utm_source=kong&utm_medium=jingfen&utm_campaign=t_1001280291_&utm_term=fa3f8f38c56f44e2b4bfc2f37bce9713`,
-        "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
+        "User-Agent": $.UA
+        // "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
       }
     }
     $.get(options, (err, resp, data) => {
@@ -277,7 +279,8 @@ function taskUrl(token,venderId) {
         "accept-language": "zh-CN,zh;q=0.9",
         "cookie": cookie,
         "referer": `https://h5.m.jd.com/`,
-        "user-agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
+        "User-Agent": $.UA
+        // "user-agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
       }
     }
     $.get(options, (err, resp, data) => {
@@ -362,6 +365,18 @@ function jsonParse(str) {
       return [];
     }
   }
+}
+
+function randomString(e) {
+  e = e || 32;
+  let t = "abcdef0123456789", a = t.length, n = "";
+  for (i = 0; i < e; i++)
+    n += t.charAt(Math.floor(Math.random() * a));
+  return n
+}
+
+function getUA() {
+  $.UA = `jdapp;iPhone;10.2.2;13.1.2;${randomString(40)};M/5.0;network/wifi;ADID/;model/iPhone8,1;addressid/2308460611;appBuild/167863;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 13_1_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1;`
 }
 
 // prettier-ignore
