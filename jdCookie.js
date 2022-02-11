@@ -12,6 +12,23 @@
  */
 //此处填写京东账号cookie。
 let CookieJDs = [
+'pt_key=AAJiA4t7ADDMd-UBzSpKAeLMvUM70mu-G9-aiyoP6X-ReFgW8_Cm5B-6x33ytSVRYrp_GFhqchI;pt_pin=qukai518_m;',
+'pt_key=AAJiA4vGADBRBX1NWdO4N1J5GmHij4CMeMNLK-5t77HOT_rOsIMl3dYXJTMOd2NY5SG88dn6-Zs;pt_pin=%E5%AE%8B%E7%9B%BC%E7%9B%BC1990;',
+// 'pt_key=app_openAAJh337VADDJD_urST748X63KE-U95FMHYi9HhsaBQjmQdyPSCvSRvFXX-xl7DUO5IszNGXNChE;pt_pin=1459125655-861045;',
+// 'pt_key=app_openAAJh337VADAymaltT03jNmry7KaRvQAXq7XWGovZyb5ff3RZESWyiHh2TOdF6C9-obBG5d8iNZY;pt_pin=wdNkkUNdHWVupLf;',
+// 'pt_key=app_openAAJh337VADA3RrnJh0nLWOfws6XUSuznkMZqUuqbU79l6NrVmRPAb-9vTDbsHVqMQBZzsGNc2Xo;pt_pin=jd_70f9b4e9a2ee0;',
+// 'pt_key=app_openAAJh337WADCaSkPoBRaSfA5O6IjSZ1j3MsmWpMg5RsnuJq7w5nGwPG_zx9E3r1G_xP5CiwaVy28;pt_pin=jd_759b9c84f6525;',
+// 'pt_key=app_openAAJh337WADAO8ZbvYa320smBHsXx_-ZUUzvP6VrZB6UNPSzvhW2vd7qOjfsRkeoDLSpakYAiPpI;pt_pin=jd_42887c5f9ecff;',
+// 'pt_key=app_openAAJh337WADCpe4ZztBB17XwnIb22AsAcUzC9b-VNEwvsQ-CVhCBO8gPP4kWA7UTqeU5vSNstBR8;pt_pin=hanluyang457;',
+// 'pt_key=app_openAAJh337WADDOKQnLGb1sxqI2qsm1m9cyY7Tyb4IuTI3Cj6K0BoVx50ApFcKSjiBsGWI2e5noCD8;pt_pin=jd_59287f728345c;',
+// 'pt_key=app_openAAJh337WADDM9hSFso3OokQleB6jKwfRw4Ya40CJfkoojot5dlrK8gG4O6Z13HqHrMZtbJaqWuc;pt_pin=jd_517d428ceed99;',
+// 'pt_key=app_openAAJh337WADA5yuGv2fnjeeZakdzRJ3uRLjqsqm8qHPyh40ppX5R_gCLfEIeq1xsMQibME5o2H9M;pt_pin=bulingling1988;',
+// 'pt_key=app_openAAJh337WADB9qih8kvuu0NCpz9YcGCHe1RuQvVSo7cI-tiU1vp036eNnByq8o8UBBayJd3Ucj0A;pt_pin=wdVDvxzapUJfdw;',
+// 'pt_key=app_openAAJh337XADBpRbevIaVzZHfS2tXnP6C7q0MZ4qaRSC2qPfb5CWXV0LKV0VT5XlwaCO23uzHW14s;pt_pin=jd_HdOzFZVMnftF;',
+// 'pt_key=app_openAAJh337XADCL94TLyJXC1qKaN-H7p9vqULISzl_wcq6scN_P3-PsXqeS5nR78JXGozOi9v-OC5E;pt_pin=yuan110603;',
+// 'pt_key=app_openAAJh337XADCYvPvtgbAdJFePdGdkfF4lqd3caS0E0L9JNmbl83l6dn3IWlKqzSfwm1BKasE4TT8;pt_pin=13964907390_p;',
+// 'pt_key=app_openAAJh337XADDGaFx-EPcGM1Wwr8xJFYYOb6FPHi5Lp8OnESgXJCB1acL_hUwOezq3MAF6cIMg_mA;pt_pin=x306609322;',
+// 'pt_key=app_openAAJh337XADBA0T_Y51fx5AlVEW47lXLD5d4Zvv7sLmi7ppUt_lw7Ba1_RsJQce4j6oZaQjvG_68;pt_pin=jd_kFyiaiOPkxRG;',
 ]
 // 判断环境变量里面是否有京东ck
 if (process.env.JD_COOKIE) {
@@ -41,61 +58,60 @@ for (let i = 0; i < CookieJDs.length; i++) {
 }
 
 // 以下为注入互助码环境变量（仅nodejs内起效）的代码
-function SetShareCodesEnv(nameConfig = "", envName = "") {
-    let rawCodeConfig = {}
+function SetShareCodesEnv(nameChinese = "", nameConfig = "", envName = "") {
+  let rawCodeConfig = {}
 
-    // 读取互助码
-    shareCodeLogPath = `${process.env.QL_DIR}/log/.ShareCode/${nameConfig}.log`
-    let fs = require('fs')
-    if (fs.existsSync(shareCodeLogPath)) {
-        // 因为faker2目前没有自带ini，改用已有的dotenv来解析
-        // // 利用ini模块读取原始互助码和互助组信息
-        // let ini = require('ini')
-        // rawCodeConfig = ini.parse(fs.readFileSync(shareCodeLogPath, 'utf-8'))
+  // 读取互助码
+  shareCodeLogPath = `${process.env.QL_DIR}/log/.ShareCode/${nameConfig}.log`
+  let fs = require('fs')
+  if (fs.existsSync(shareCodeLogPath)) {
+    // 因为faker2目前没有自带ini，改用已有的dotenv来解析
+    // // 利用ini模块读取原始互助码和互助组信息
+    // let ini = require('ini')
+    // rawCodeConfig = ini.parse(fs.readFileSync(shareCodeLogPath, 'utf-8'))
 
-        // 使用env模块
-        require('dotenv').config({path: shareCodeLogPath})
-        rawCodeConfig = process.env
+    // 使用env模块
+    require('dotenv').config({path: shareCodeLogPath})
+    rawCodeConfig = process.env
+  }
+
+  // 解析每个用户的互助码
+  codes = {}
+  Object.keys(rawCodeConfig).forEach(function (key) {
+    if (key.startsWith(`My${nameConfig}`)) {
+      codes[key] = rawCodeConfig[key]
     }
+  });
 
-    // 解析每个用户的互助码
-    codes = {}
-    Object.keys(rawCodeConfig).forEach(function (key) {
-        if (key.startsWith(`My${nameConfig}`)) {
-            codes[key] = rawCodeConfig[key]
-        }
-    });
+  // 解析每个用户要帮助的互助码组，将用户实际的互助码填充进去
+  let helpOtherCodes = {}
+  Object.keys(rawCodeConfig).forEach(function (key) {
+    if (key.startsWith(`ForOther${nameConfig}`)) {
+      helpCode = rawCodeConfig[key]
+      for (const [codeEnv, codeVal] of Object.entries(codes)) {
+        helpCode = helpCode.replace("${" + codeEnv + "}", codeVal)
+      }
 
-    // 解析每个用户要帮助的互助码组，将用户实际的互助码填充进去
-    let helpOtherCodes = {}
-    Object.keys(rawCodeConfig).forEach(function (key) {
-        if (key.startsWith(`ForOther${nameConfig}`)) {
-            helpCode = rawCodeConfig[key]
-            for (const [codeEnv, codeVal] of Object.entries(codes)) {
-                helpCode = helpCode.replace("${" + codeEnv + "}", codeVal)
-            }
-
-            helpOtherCodes[key] = helpCode
-        }
-    });
-
-    // 按顺序用&拼凑到一起，并放入环境变量，供目标脚本使用
-    let shareCodes = []
-    let totalCodeCount = Object.keys(helpOtherCodes).length
-    for (let idx = 1; idx <= totalCodeCount; idx++) {
-        shareCodes.push(helpOtherCodes[`ForOther${nameConfig}${idx}`])
+      helpOtherCodes[key] = helpCode
     }
-    let shareCodesStr = shareCodes.join('&')
-    process.env[envName] = shareCodesStr
+  });
 
-    console.info(`【风之凌殇】 友情提示：为避免ck超过45以上时，互助码环境变量过大而导致调用一些系统命令（如date/cat）时报 Argument list too long，改为在nodejs中设置 ${nameConfig} 的 互助码环境变量 ${envName}，共计 ${totalCodeCount} 组互助码，总大小为 ${shareCodesStr.length}`)
+  // 按顺序用&拼凑到一起，并放入环境变量，供目标脚本使用
+  let shareCodes = []
+  let totalCodeCount = Object.keys(helpOtherCodes).length
+  for (let idx = 1; idx <= totalCodeCount; idx++) {
+    shareCodes.push(helpOtherCodes[`ForOther${nameConfig}${idx}`])
+  }
+  let shareCodesStr = shareCodes.join('&')
+  process.env[envName] = shareCodesStr
+
+  console.info(`${nameChinese} 的 互助码环境变量 ${envName}，共计 ${totalCodeCount} 组互助码，总大小为 ${shareCodesStr.length} 字节`)
 }
 
 // 若在task_before.sh 中设置了要设置互助码环境变量的活动名称和环境变量名称信息，则在nodejs中处理，供活动使用
+let nameChinese = process.env.ShareCodeConfigChineseName
 let nameConfig = process.env.ShareCodeConfigName
 let envName = process.env.ShareCodeEnvName
-if (nameConfig && envName) {
-    SetShareCodesEnv(nameConfig, envName)
-} else {
-    console.debug(`Faker 友情提示：您的脚本正常运行中`)
+if (nameChinese && nameConfig && envName) {
+  SetShareCodesEnv(nameChinese, nameConfig, envName)
 }
