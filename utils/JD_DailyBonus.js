@@ -16,7 +16,7 @@ var Key = 'pt_key=AAJhhkXAADAUC-914YIfkam7Kc4zHsz7B3esXqzBPonqSxAq1zTSQHRV7tZXX2
 
 var DualKey = ''; //该参数已废弃; 仅用于下游脚本的兼容, 请使用json串数据  ↓
 
-var OtherKey = `[{"cookie":"pt_key=AAJhrgZQADAfIaN5YXZVnLCic64FvdIftI3n0dnyDT5rs8KMHOImDd5nZVPSl9hcGh8Nw0Wpf1Q;pt_pin=%E5%AE%8B%E7%9B%BC%E7%9B%BC1990;","jrBody":""}]`; //无限账号Cookie json串数据, 请严格按照json格式填写, 具体格式请看以下样例:
+var OtherKey = `[{"cookie":"pt_key=AAJiA4vGADBRBX1NWdO4N1J5GmHij4CMeMNLK-5t77HOT_rOsIMl3dYXJTMOd2NY5SG88dn6-Zs;pt_pin=%E5%AE%8B%E7%9B%BC%E7%9B%BC1990;","jrBody":""}]`; //无限账号Cookie json串数据, 请严格按照json格式填写, 具体格式请看以下样例:
 
 
 var LogDetails = false; //是否开启响应日志, true则开启
