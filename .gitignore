@@ -1,6 +1,8 @@
+node_modules/
 *.bat
-/jdCookie.js
-jddjCookie
+*.txt
+jdCookie.js
+jddj\jddjCookie.js
 jdCashShareCodes.js
 jdDreamFactoryShareCodes.js
 jdFactoryShareCodes.js
@@ -12,6 +14,4 @@ jdPetShareCodes.js
 jdPlantBeanShareCodes.js
 jdSuperMarketShareCodes.js
 jdzzShareCodes.js
-jdCookie.js
-*.js
-*.js
+
