@@ -1,7 +1,6 @@
 node_modules/
 *.bat
 *.txt
-jdCookie.js
 jddj\jddjCookie.js
 jdCashShareCodes.js
 jdDreamFactoryShareCodes.js
