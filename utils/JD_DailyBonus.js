@@ -12,11 +12,11 @@
 如需获取京东金融签到Body, 可进入"京东金融"APP (iOS), 在"首页"点击"签到"并签到一次, 返回抓包app搜索关键字 h5/m/appSign 复制请求体填入json串数据内即可
 */
 
-var Key = 'pt_key=AAJhhkXAADAUC-914YIfkam7Kc4zHsz7B3esXqzBPonqSxAq1zTSQHRV7tZXX2n0035vwSWeGN4;pt_pin=%E5%AE%8B%E7%9B%BC%E7%9B%BC1990;'; //该参数已废弃; 仅用于下游脚本的兼容, 请使用json串数据 ↓
+var Key = ''; //该参数已废弃; 仅用于下游脚本的兼容, 请使用json串数据 ↓
 
 var DualKey = ''; //该参数已废弃; 仅用于下游脚本的兼容, 请使用json串数据  ↓
 
-var OtherKey = `[{"cookie":"pt_key=AAJiA4vGADBRBX1NWdO4N1J5GmHij4CMeMNLK-5t77HOT_rOsIMl3dYXJTMOd2NY5SG88dn6-Zs;pt_pin=%E5%AE%8B%E7%9B%BC%E7%9B%BC1990;","jrBody":""}]`; //无限账号Cookie json串数据, 请严格按照json格式填写, 具体格式请看以下样例:
+var OtherKey = ``; //无限账号Cookie json串数据, 请严格按照json格式填写, 具体格式请看以下样例:
 
 
 var LogDetails = false; //是否开启响应日志, true则开启
@@ -37,7 +37,7 @@ var merge = {};
 
 var KEY = '';
 
-const Faker = require('./JDSignValidator')
+const Faker = require('../JDSignValidator')
 const zooFaker = require('./JDJRValidator_Pure')
 let fp = '', eid = '', md5
 
@@ -754,9 +754,9 @@ function JDUserSign1(s, key, title, body) {
 async function JDUserSign2(s, key, title, tid, acData) {
   await new Promise(resolve => {
     let lkt = new Date().getTime()
-    let lks = md5('' + 'q8DNJdpcfRQ69gIx' + lkt).toString()
+    let lks = md5('' + 'JL1VTNRadM68cIMQ' + lkt).toString()
     $nobyda.get({
-      url: `https://jdjoy.jd.com/api/turncard/channel/detail?turnTableId=${tid}&invokeKey=q8DNJdpcfRQ69gIx`,
+      url: `https://jdjoy.jd.com/api/turncard/channel/detail?turnTableId=${tid}&invokeKey=JL1VTNRadM68cIMQ`,
       headers: {
         Cookie: KEY,
         'lkt': lkt,
@@ -786,9 +786,9 @@ async function JDUserSign2(s, key, title, tid, acData) {
   return new Promise(resolve => {
     setTimeout(() => {
       let lkt = new Date().getTime()
-      let lks = md5('' + 'q8DNJdpcfRQ69gIx' + lkt).toString()
+      let lks = md5('' + 'JL1VTNRadM68cIMQ' + lkt).toString()
       const JDUrl = {
-        url: 'https://jdjoy.jd.com/api/turncard/channel/sign?invokeKey=q8DNJdpcfRQ69gIx',
+        url: 'https://jdjoy.jd.com/api/turncard/channel/sign?invokeKey=JL1VTNRadM68cIMQ',
         headers: {
           Cookie: KEY,
           'lkt': lkt,
